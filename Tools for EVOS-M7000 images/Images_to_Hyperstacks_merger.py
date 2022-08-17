@@ -3,7 +3,7 @@
 ###############################################################################################################################################################
 '''
 
-Full name of script: Hyperstack generator for EVOS M700 images [Version 01]
+Full name of script: Hyperstack generator for EVOS M700 images [Version 02]
 
 Script languague: Jython (Python wrapper for Java, run with ImageJ/Fiji app -not pyImageJ-)
 
@@ -88,16 +88,17 @@ total_slices = image_data[-1][3]
 
 control_FOV = 0
 control_channels = 0
+image_index = 0
 
 #Open all the slices for each channel of each FOV
-for image_index, image_info in enumerate(image_data):
+while image_index <= len(image_data):
 
-	#
+	image_info = image_data[image_index] if image_index < len(image_data) else image_data[image_index-1]
 	current_FOV = image_info[1]
 	current_channel = image_info[2]
 
 	#This will make require to include PLA in all the image names
-	if control_FOV != current_FOV or control_channels != current_channel:
+	if control_FOV != current_FOV or control_channels != current_channel or image_index == len(image_data):
 		IJ.run("Images to Stack", "name=Stack title=PLA use")
 		stack = WindowManager.getImage("Stack")
 		stack.setTitle("Stack_channel_" + str(control_channels))
@@ -105,8 +106,8 @@ for image_index, image_info in enumerate(image_data):
 		IJ.run("Collect Garbage", "")
 
 		#This needs to be adjusted if the number of channels is different than 3, and the order depending the acquisition
-		if control_FOV != current_FOV:
-			IJ.run("Merge Channels...", "c1=[Stack_channel_2] c2=[Stack_channel_1] c3=[Stack_channel_0] create")
+		if control_FOV != current_FOV or image_index == len(image_data):
+			IJ.run("Merge Channels...", "c2=[Stack_channel_1] c3=[Stack_channel_0] create")
 			time.sleep(0.5)
 			IJ.selectWindow("Composite")
 			hyperstack = IJ.getImage()
@@ -118,6 +119,10 @@ for image_index, image_info in enumerate(image_data):
 			IJ.run("Collect Garbage", "")
 			control_FOV = current_FOV
 
+			#After the final image is saved, we go out to not open any other images
+			if image_index == len(image_data):
+				break
+
 	#Open image
 	current_raw_image = IJ.openImage(image_info[0])
 	current_raw_image.show()
@@ -128,12 +133,14 @@ for image_index, image_info in enumerate(image_data):
 		time.sleep(0.1)
 	print("Image:", image_index+1, "/", len(image_data))
 
+	image_index = image_index + 1
+
 
 ###############################################################################################################################################################
 
 #Finish the timer and print processing time
 ending_time = datetime.now()
-processing_time = (ending_time.getTime() - starting_time.getTime())/1000.000000
+processing_time = (ending_time.getTime() - starting_time.getTime())/1000.00
 print("Images processed:", len(image_data), "Script processing time (min):", processing_time/60)
 
 ###############################################################################################################################################################
