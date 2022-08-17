@@ -3,7 +3,7 @@
 ###################################################################################################################################################################
 '''
 
-Full name of script: Proximity Ligation Assay (PLA) quantification  [Version 01]
+Full name of script: Proximity Ligation Assay (PLA) quantification  [Version 02]
 
 Script languague: Jython (Python wrapper for Java, run with ImageJ/Fiji app -not pyImageJ-)
 
@@ -22,12 +22,13 @@ Made by: Eduardo Reyes Alvarez
 
 Contact: eduardo_reyes09@hotmail.com
 
-Last update: June 01, 2021
+Last update: June 20, 2021
 
 Version History:
 V01 (Jun 01, 2021): First working version of the script. Requires a specific folder structure and 2 sets of ROIs per cell of interest. Some outputs are optional
                     such as cropped images of each cell, each PLA channel thresholded and the actual quantification (excel files). Code fully annotated.
-
+V02 (June 20, 2021): Fixed/improved some directory handling during the iterations. Some steps can be improved: data saving and iteration through the images + 
+                     ROIs when the raw images are heavy.
 '''
 
 ###################################################################################################################################################################
@@ -41,14 +42,15 @@ from ij import WindowManager
 from ij.plugin.frame import RoiManager
 from ij.gui import Roi
 
-#@ File    (label = "Raw Image folder", style = "directory") raw_image_directory
-#@Integer  (label = "PLA channel number", style = "slider", min=1, max=5, stepSize=1) PLA_channel
-#@String   (label = "Threshold method", style = "listBox", choices = { "Default", "Huang", "Intermodes","IsoData", "IJ_IsoData", "Li", "MaxEntropy", "Mean", "MinError", "Minimum", "Moments", "Otsu", "Percentile", "RenyiEntropy", "Shanbhag", "Triangle", "Yen"}) threshold_method
-#@ File    (label = "Analysis folder", style = "directory") analysis_directory
+#@ File    (label = "Raw Images folder", style = "directory") raw_image_directory
+#@ Integer  (label = "PLA channel number", style = "slider", min=1, max=5, stepSize=1) PLA_channel
+#@ String   (label = "Threshold method", style = "listBox", choices = { "Default", "Huang", "Intermodes","IsoData", "IJ_IsoData", "Li", "MaxEntropy", "Mean", "MinError", "Minimum", "Moments", "Otsu", "Percentile", "RenyiEntropy", "Shanbhag", "Triangle", "Yen"}) threshold_method
 #@ File    (label = "Cropped cells folder", style = "directory") cells_directory
-#@Boolean   (label="Crop cells", style = "checkbox") Crop_cells
-#@Boolean   (label="PLA thresholding", style = "checkbox") PLA_thresholding
-#@Boolean   (label="Quantification", style = "checkbox") Quantification
+#@ File    (label = "Analysis folder", style = "directory") analysis_directory
+#@ Boolean   (label="Crop cells", style = "checkbox") Crop_cells
+#@ Boolean   (label="PLA thresholding", style = "checkbox") PLA_thresholding
+#@ Boolean   (label="Quantification", style = "checkbox") Quantification
+#@ String (visibility=MESSAGE, value="Script made by: Eduardo Reyes-Alvarez", required=false) msg3
 
 #Start the timer
 starting_time = datetime.now()
@@ -62,7 +64,8 @@ analysis_directory = analysis_directory.getAbsolutePath()
 
 #If the raw cells are big images with lots of cells, this will be done for data/results presentation, if not, then proceed to the next section
 if Crop_cells==True:
-	cells_directory = cells_directory.getAbsolutePath()
+	cropped_cells_directory = cells_directory.getAbsolutePath()
+	ROIs_cropped_cells_directory = os.path.join(cropped_cells_directory, "ROIs_used_to_crop")
 	
 	#Walk through the raw image folder in case files or subfolders are used
 	for raw_temp_directory, subfolder, raw_image_names in os.walk(raw_image_directory):
@@ -72,14 +75,14 @@ if Crop_cells==True:
 		for raw_image_name in raw_image_names:
 
 			#If Croppig cells, there MUST be a subfolder called ROIs_used_to_crop in the folder Cells with the same directory structure as the Raw_images
-			ROIs_to_crop_folder = os.path.join(cells_directory, "ROIs_used_to_crop")
+			ROIs_to_crop_folder = os.path.join(raw_temp_directory.replace(raw_image_directory, ROIs_cropped_cells_directory), os.path.splitext(raw_image_name)[0])
 			
 			#Walk through the ROIs folder, in case files or subfolders are used
-			for ROI_temp_directory, subfolder2, ROIs in os.walk(os.path.join(ROIs_to_crop_folder, os.path.splitext(raw_image_name)[0])):
-
+			for ROI_temp_directory, subfolder2, ROIs in os.walk(ROIs_to_crop_folder):
+				
 				#Iterate through each ROI (of each raw image)
 				for ROI in ROIs:
-
+					
 					#Open the current raw image
 					current_raw_image = IJ.openImage(os.path.join(raw_temp_directory, raw_image_name))
 					current_raw_image.show()
@@ -101,7 +104,7 @@ if Crop_cells==True:
 					cropped_cell = IJ.getImage()
 
 					#Make the directories and names to save the images
-					save_cropped_directory = ROI_temp_directory.replace(os.path.join(cells_directory, "ROIs_used_to_crop"), cells_directory)
+					save_cropped_directory = ROI_temp_directory.replace(ROIs_cropped_cells_directory, cropped_cells_directory)
 					save_cropped_name = os.path.join(save_cropped_directory, os.path.splitext(ROI)[0])					
 					if not os.path.exists(save_cropped_directory):
 						os.makedirs(save_cropped_directory)
@@ -115,7 +118,7 @@ if Crop_cells==True:
 					IJ.run("Collect Garbage", "")
 
 ###################################################################################################################################################################
-##################################################### PLA channel thresholding ####################################################################################
+################################################################### PLA channel thresholding ######################################################################
 
 if PLA_thresholding==True:
 
@@ -161,40 +164,42 @@ if PLA_thresholding==True:
 
 if Quantification==True:
 
+	#There MUST be a subfolder called ROIs_analyzed in the folder Analysis with the same directory structure as the PLA_channels
+	ROIs_analyzed = os.path.join(analysis_directory, "ROIs_analyzed")
+	thresholded_PLA_channels = os.path.join(analysis_directory, "PLA_channels")
+
 	#Walk through the raw image folder in case files or subfolders are used
 	for PLA_temp_directory, subfolder, PLA_image_names in os.walk(os.path.join(analysis_directory, "PLA_channels")):
 		PLA_image_names.sort()
 	
 		#Iterate through each PLA image 
 		for PLA_image_name in PLA_image_names:
+
+			#For each PLA thresholded image, there must be a folder with the same name containing the ROIs to analyze for that image
+			PLA_ROIs_folder = os.path.join(PLA_temp_directory.replace(thresholded_PLA_channels, ROIs_analyzed), os.path.splitext(PLA_image_name)[0])
 			
-			#There MUST be a subfolder called ROIs_analyzed in the folder Analysis with the same directory structure as the PLA_channels
-			ROIs_analyzed = os.path.join(analysis_directory, "ROIs_analyzed")
-				
-			#Walk through the ROIs folder, in case files or subfolders are used
-			for PLA_ROI_temp_directory, subfolder3, PLA_ROIs in os.walk(os.path.join(ROIs_analyzed, os.path.splitext(PLA_image_name)[0])):
-				
-				#Iterate through each PLA ROI (of each raw image)
+			#Iterate through each PLA ROI (of each raw image)
+			for PLA_ROI_directory, subfolder2, PLA_ROIs in os.walk(PLA_ROIs_folder):
 				for PLA_ROI in PLA_ROIs:
 					
 					#Open the current PLA image
 					current_PLA_image = IJ.openImage(os.path.join(PLA_temp_directory, PLA_image_name))
 					current_PLA_image.show()
 					image_opened = WindowManager.getWindow(PLA_image_name)
-					
+
 					#If the image is big and heavy, ImageJ will take a moment to open it, so we delay the script to wait for it
 					while image_opened==None:
 						time.sleep(0.5)
-					
+
 					#Load the ROI manager and open the current ROI
 					rm = RoiManager()
-					current_PLA_ROI_directory = os.path.join(PLA_ROI_temp_directory, PLA_ROI)
+					current_PLA_ROI_directory = os.path.join(PLA_ROI_directory, PLA_ROI)
 					rm.runCommand("Open", str(current_PLA_ROI_directory))
 					rm.select(0)
-					
+						
 					#Get the area of the ROI
 					rm.runCommand("Measure")
-					
+				
 					#Analyze particles to count PLA puncta which meet the size criteria
 					IJ.selectWindow(1)
 					IJ.run("Analyze Particles...", "size=0.1-1000 summarize")
