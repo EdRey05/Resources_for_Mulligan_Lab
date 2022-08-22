@@ -51,15 +51,13 @@ from ij.gui import Roi
 #@ File    (label = "Experimental condition folder:", style = "directory") exp_condition_folder
 #@ String  (label="Name of folder containing images to crop/quantify:", description="Name field") source_images_folder
 #@ Integer (label = "PLA channel number", style = "slider", min=1, max=5, stepSize=1) PLA_channel
-#@ String  (visibility=MESSAGE, value="Particle counting is usually improved by background subtraction with low radius", required=false) msg1
-#@ Integer (label="Rolling radius for PLA background subtraction:", min=1, max=50, description="<10 recommended, test your images first", value=3) PLA_background_radius
+#@ String  (label = "Threshold method", style = "listBox", choices = { "Default", "Huang", "Intermodes","IsoData", "IJ_IsoData", "Li", "MaxEntropy", "Mean", "MinError", "Minimum", "Moments", "Otsu", "Percentile", "RenyiEntropy", "Shanbhag", "Triangle", "Yen"}) threshold_method
 #@ Boolean (label="Crop cells", style = "checkbox") Crop_cells
 #@ String  (choices={"-", "Threshold + Analyze Particles", "Find Maxima + Analyze Particles", "Both"}, style="listBox") Quantification
-#@ String  (visibility=MESSAGE, value="Adjust the parameters for quantification:", required=false) msg2
-#@ String  (label="Particle size (pixel squared)", description="0-Infinity, 10-1000, etc.", value="3-Infinity") particle_sizes
+#@ Integer (label="Rolling radius for PLA background subtraction:", min=1, max=50, description="3-5 recommended", value=3) PLA_background_radius
+#@ String  (label="Particle size (pixel squared):", description="0-Infinity, 10-1000, etc.", value="3-Infinity") particle_sizes
 #@ String  (label="Particle circuarity:", description="0.00-1.00", value="0.10-1.00") particle_circularity
-#@ String  (label = "Threshold method (if selected)", style = "listBox", choices = { "-","Default", "Huang", "Intermodes","IsoData", "IJ_IsoData", "Li", "MaxEntropy", "Mean", "MinError", "Minimum", "Moments", "Otsu", "Percentile", "RenyiEntropy", "Shanbhag", "Triangle", "Yen"}) threshold_method
-#@ Integer (label="Prominence for Maxima (if selected):", min=1, max=100000, description="Test this number in a subset of images beforehand", value=500) prominence
+#@ Integer (label="Prominence (for Maxima):", min=1, max=100000, description="Test this number in a subset of images beforehand", value=500) prominence
 #@ String  (visibility=MESSAGE, value="Script made by: Eduardo Reyes-Alvarez", required=false) msg3
 
 #Start the timer
