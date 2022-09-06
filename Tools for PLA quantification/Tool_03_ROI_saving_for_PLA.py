@@ -1,7 +1,7 @@
 ######################################################################################################################################################################
 '''
 
-Full name of script: Tool 03 to save ROIs for Proximity Ligation Assay (PLA) quantification  [Version 01]
+Full name of script: Tool 03 to save ROIs for Proximity Ligation Assay (PLA) quantification  [Version 02]
 
 Script languague: Jython (Python wrapper for Java, run with ImageJ/Fiji app -not pyImageJ-)
 
@@ -22,6 +22,9 @@ Last update: Aug 23, 2022
 
 Version History:
 V01 (Aug 23, 2022): First working version, fully annotated. 
+V02 (Sept 06, 2022): Minor adjustment to 1 line, where we replace the path of "For Presentation", for "For Analysis" to find the second ROI, just added the extension
+                     .roi because some folders have 2 sections were "_2" can be found, like ".../Row_16_20/0_2.roi" and thus both were changed to ".../Row_16_10/0_1.roi"
+                     which can't be found and cause multiple error messages from the ROI manager. Fixed issue, fully working now and everything else is the same.
 
 '''
 ######################################################################################################################################################################
@@ -67,7 +70,7 @@ for ROI_folder, subfolder, ROIs in os.walk(presentation_ROIs_folder):
 		rm.runCommand("Open", os.path.join(ROI_folder, ROI))
 		
 		#Open each ROI with the same name but in the For Analysis Folder
-		rm.runCommand("Open", os.path.join(ROI_folder, ROI).replace("Presentation", "Analysis").replace("_2", "_1"))
+		rm.runCommand("Open", os.path.join(ROI_folder, ROI).replace("Presentation", "Analysis").replace("_2.roi", "_1.roi"))
 
 #Let the user know the script is done
 print("\n \t All the ROIs have been opened!")
