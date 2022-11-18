@@ -3,7 +3,7 @@
 ###############################################################################################################################################################
 '''
 
-Full name of script: Hyperstack generator for EVOS M700 images [Version 03]
+Full name of script: Hyperstack generator for EVOS M700 images [Version 04]
 
 Script languague: Jython (Python wrapper for Java, run with ImageJ/Fiji app -not pyImageJ-)
 
@@ -22,6 +22,7 @@ Version History:
 V01 (Mar 28, 2022): First working version of the script, it works but doesnt stack, merge and save the very last image. Code not fully annotated.
 V02 (Mar 28, 2022): Several conditions and specific cases implemented, now it works for all images. It works for 1 or more channels but needs manual changes.
 V03 (Apr 01, 2022): Works with any number of channels and order (selected by user menu). Code fully annotated.
+V03 (Apr 01, 2022): Minor directory change, now it asks for the experiment folder (like the other scripts) instead of the subfolder containing the images.
 
 '''
 
@@ -36,7 +37,7 @@ from ij import WindowManager
 from ij.plugin.frame import RoiManager
 from ij.gui import Roi
 
-#@ File    (label = "Raw Image folder", style = "directory") raw_image_directory
+#@ File    (label = "Experimental condition folder (must contain a -Raw Images- subfolder)", style = "directory") raw_image_directory
 #@ String (visibility=MESSAGE, value="For Brightfield select Gray (check images are saved as Mono and not RGB)", required=false) msg1
 #@ String (visibility=MESSAGE, value="Note: The EVOS starts counting the channels from 0", required=false) msg2
 #@String   (label = "Channel 0 colour: ", style = "listBox", choices = { "", "Red", "Green", "Blue", "Gray", "Cyan", "Magenta" }) ch0_color
@@ -52,7 +53,7 @@ from ij.gui import Roi
 starting_time = datetime.now()
 
 #Get full path of raw images and the cells folder from the menu
-raw_image_directory = raw_image_directory.getAbsolutePath()
+raw_image_directory = os.path.join(raw_image_directory.getAbsolutePath() , "Raw Images")
 
 ###############################################################################################################################################################
 ####################################################### Retrieving information of raw images ##################################################################
