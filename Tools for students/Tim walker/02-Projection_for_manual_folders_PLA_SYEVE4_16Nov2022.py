@@ -1,7 +1,7 @@
 ############################################################################################################################################################
 '''
 
-Full name of script: Image projection and background subtraction for manually acquired folders of PLA experiment in EV and E4 TMEM127 KO SH-SY5Y cells  [V 01]
+Full name of script: Image projection and background subtraction for manually acquired folders of PLA experiment in EV and E4 TMEM127 KO SH-SY5Y cells  [V 02]
 
 Script languague: Jython (Python wrapper for Java, run with ImageJ/Fiji app -not pyImageJ-)
 
@@ -19,6 +19,7 @@ Last update: November 18, 2022
 Version History:
 V01 (November 18, 2022): First version of the script adapted as a standalone part (it required minor edits from the original script, mostly name of a missing
 						 variable and change variable names to refer to "merged" images instead of "stitched").
+V02 (November 18, 2022): Minor edit, now the user can provide the rolling radius for background subtraction in case the images are more or less noisy.
 
 '''
 
@@ -33,6 +34,7 @@ from ij import IJ, ImagePlus
 from ij import WindowManager
 
 #@ File    (label = "Experiment folder", style = "directory") experiment_directory
+#@ Integer (label="Rolling radius (for background subtraction):", min=1, max=1000, description="Test this number beforehand", value=100) background_radius
 #@ String (visibility=MESSAGE, value="Script made by: Eduardo Reyes-Alvarez", required=false) msg6
 
 #Get full path of raw images and the cells folder from the menu
@@ -78,7 +80,7 @@ for folder, subfolder, merged_images in os.walk(merging_saving_path):
         
         #Subtract the background to clean the image and improve contrast
         projected_image = IJ.getImage()
-        IJ.run("Subtract Background...", "rolling=150")
+        IJ.run("Subtract Background...", "rolling="+str(background_radius))
         projected_image = IJ.getImage()
         
         #Save the projection
