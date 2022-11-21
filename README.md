@@ -1,11 +1,11 @@
-# Resources_for_Mulligan_Lab
+# Resources for the Mulligan Lab
 
 Scripts made by Eduardo Reyes Alvarez (Ph.D.) to help in data processing and analysis of several experiments carried out in Dr. Lois Mulligan's Lab at Queen's University. 
 
-Most of the tools developed (scripts/notebooks) are described below, and include a preview + a link to the code (click on the bluetitle). For a more detailed video tutorial check the [Tutorials](Tutorials/README.md) folder above.
+Most of the tools developed (scripts/notebooks) are described below, and include a preview + a link to the code (click on the blue title). For a more detailed video tutorial check the [Tutorials](https://github.com/EdRey05/Resources_for_Mulligan_Lab/tree/main/Tutorials).
 
 
-# [Images to hyperstacks merger](Tools%20for%20EVOS-M7000%20images/Images_to_Hyperstacks_merger.py)
+# [Images to hyperstacks merger](https://github.com/EdRey05/Resources_for_Mulligan_Lab/tree/main/Tools%20for%20EVOS-M7000%20images)
 
 **Context:**
 
