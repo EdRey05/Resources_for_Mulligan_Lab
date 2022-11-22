@@ -54,10 +54,10 @@ ROI_temp_directory = ROI_temp_directory.getAbsolutePath()
 #Make the subfolders for each set of ROIs
 ROIs_for_analysis_folder = os.path.join(ROI_temp_directory, "For Analysis")
 if not os.path.exists(ROIs_for_analysis_folder):
-						os.makedirs(ROIs_for_analysis_folder)
+	os.makedirs(ROIs_for_analysis_folder)
 ROIs_for_presentation_folder = os.path.join(ROI_temp_directory, "For Presentation")
 if not os.path.exists(ROIs_for_presentation_folder):
-						os.makedirs(ROIs_for_presentation_folder)
+	os.makedirs(ROIs_for_presentation_folder)
 
 #Start the ROI manager (in a variable), get the content of the current manager window, and count the ROIs drawn
 rm = RoiManager()
