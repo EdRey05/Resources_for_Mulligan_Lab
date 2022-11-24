@@ -1,18 +1,18 @@
 ######################################################################################################################################################################
 '''
 
-Full name of script: Tool 03 to save ROIs for Proximity Ligation Assay (PLA) quantification  [Version 02]
+Full name of script: Tool 03 to open ROIs for Proximity Ligation Assay (PLA) quantification  [Version 02]
 
 Script languague: Jython (Python wrapper for Java, run with ImageJ/Fiji app -not pyImageJ-)
 
 Description: This is a short script that helps an user openning the two sets of ROIs (For Presentation and For Analysis) for an image, made before or by somebody else
              with the purpose to review the image to add more cells that look good for analysis and were not included before. This script asks to select an image from
-			 the raw or processed folder, which should be open and in the same folder as another called "ROIs". The latter must contain 2 folders: "For Presentation" 
-			 which contains the ROIs for data presentation, and "For Analysis" which contains the areas quantified. The script finds the subfolder with the name of the
-			 image selected inside these 2 folders of ROIs and iterates through them, opening first the "X_1.roi" and then "X_2.roi". Finally, once the user loads the 
-			 current ROIs, they can proceed to draw more in the same order (rectangle first, polygon second) and use the script called "Tool 01 to save ROIs for PLA 
-			 quantification" to save all of them. Note: if the nimages have a name in a different format than "MAX_Row_01_05.tif", edit the lines that crop the image
-			 selected to find the its folders.
+	     the raw or processed folder, which should be open and in the same folder as another called "ROIs". The latter must contain 2 folders: "For Presentation" 
+	     which contains the ROIs for data presentation, and "For Analysis" which contains the areas quantified. The script finds the subfolder with the name of the
+	     image selected inside these 2 folders of ROIs and iterates through them, opening first the "X_1.roi" and then "X_2.roi". Finally, once the user loads the 
+	     current ROIs, they can proceed to draw more in the same order (rectangle first, polygon second) and use the script called "Tool 01 to save ROIs for PLA 
+	     quantification" to save all of them. Note: if the nimages have a name in a different format than "MAX_Row_01_05.tif", edit the lines that crop the image
+	     selected to find the its folders.
 
 Made by: Eduardo Reyes Alvarez
 
