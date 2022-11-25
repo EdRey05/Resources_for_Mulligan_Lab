@@ -2,7 +2,7 @@
 
 Scripts made by Eduardo Reyes Alvarez (Ph.D.) to help in data processing and analysis of several experiments carried out in Dr. Lois Mulligan's Lab at Queen's University. 
 
-Most of the tools developed (scripts/notebooks) are described below, and include a preview + a link to their folder (click on the blue title). ***For a more detailed video tutorial check:*** [Tutorials](https://github.com/EdRey05/Resources_for_Mulligan_Lab/tree/main/Tutorials).
+Most of the tools developed (scripts/notebooks) are described below, and include a preview + a link to their folder (click on the blue title). ***For more information on how to use the scripts, check:*** [Tutorials](https://github.com/EdRey05/Resources_for_Mulligan_Lab/tree/main/Tutorials).
 
 
 # [Merger of images into hyperstacks](https://github.com/EdRey05/Resources_for_Mulligan_Lab/tree/main/Tools%20for%20EVOS-M7000%20images)
@@ -48,4 +48,15 @@ This tool saves in a temporary folder the two sets of ROIs as described above. I
 **Preview of the script:**
 ![Preview_Tool_01_ROI_saving_for_PLA](https://user-images.githubusercontent.com/62916582/203685126-e7668b9e-dbac-425e-b59c-43440aa1df3a.gif)
 
+## Tool 02
+**Description:**
+This tool saves ROIs...
 
+**Preview of the script:**
+
+## Tool 03
+**Description:**
+This tool opens the two sets of ROIs that were drawn for an image. It has no requirements other than having a folder structure as described above (Processed..., ROIs). By openning a processed image (MAX projection TIF), the script can load the ROIs in case it is needed to review, delete, or add more ROIs (then just run tool 01).
+
+**Preview of the script:**
+![Preview_Tool_03_ROI_opening_for_PLA](https://user-images.githubusercontent.com/62916582/203877499-e528d699-5d2c-4cc5-9dbe-c07cd1293e3f.gif)
