@@ -22,7 +22,8 @@ Version History:
 V01 (Mar 28, 2022): First working version of the script, it works but doesnt stack, merge and save the very last image. Code not fully annotated.
 V02 (Mar 28, 2022): Several conditions and specific cases implemented, now it works for all images. It works for 1 or more channels but needs manual changes.
 V03 (Apr 01, 2022): Works with any number of channels and order (selected by user menu). Code fully annotated.
-V03 (Apr 01, 2022): Minor directory change, now it asks for the experiment folder (like the other scripts) instead of the subfolder containing the images.
+V04 (Nov 18, 2022): Minor directory change, now it asks for the experiment folder (like the other scripts) instead of the subfolder containing the images.
+		    Pending: Check additional exception scenarios, such as 1 Z-slice FOVs, random FOV numbering and slides/plates with multiple rows of wells.
 
 '''
 
