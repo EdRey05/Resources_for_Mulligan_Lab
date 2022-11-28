@@ -1,8 +1,8 @@
 # Resources for the Mulligan Lab
 
-Scripts made by Eduardo Reyes Alvarez (Ph.D.) to help in data processing and analysis of several experiments carried out in Dr. Lois Mulligan's Lab at Queen's University. 
+Most of the tools developed are described below, and include a GIF preview + a link to their folder (click on the title). The majority of these tools were designed to be run inside the ImageJ/Fiji software, which we commonly use for data analysis, plus some notebooks designed in Google Colab for additional tasks. These tools do not require any programming experience nor installing any program other than ImageJ.
 
-Most of the tools developed (scripts/notebooks) are described below, and include a preview + a link to their folder (click on the blue title). ***For more information on how to use the scripts, check:*** [Tutorials](https://github.com/EdRey05/Resources_for_Mulligan_Lab/tree/main/Tutorials).
+***For more information on how to use the scripts, check:*** [Tutorials](https://github.com/EdRey05/Resources_for_Mulligan_Lab/tree/main/Tutorials).
 
 
 # [Merger of images into hyperstacks](https://github.com/EdRey05/Resources_for_Mulligan_Lab/tree/main/Tools%20for%20EVOS-M7000%20images)
@@ -50,9 +50,10 @@ This tool saves in a temporary folder the two sets of ROIs as described above. I
 
 ## Tool 02
 **Description:**
-This tool saves ROIs...
+This tool is split in two sections, the top part is for making the rectangular ROIs and the jpg preview (as mentioned in Tool 01), and the second part is for making the ROIs with the polygon tool. The idea behind the split parts is that the experimenter can pre-select the cells they want analyzed by doing the rectangular ROIs, and then someone else can take the jpg images to make the polygons, which is the time-consuming step.
 
 **Preview of the script:**
+![Preview_Tool_02_ROI_saving_for_PLA](https://user-images.githubusercontent.com/62916582/204342846-399fb3aa-db35-4cfe-a2e5-2f550d1314f6.gif)
 
 ## Tool 03
 **Description:**
