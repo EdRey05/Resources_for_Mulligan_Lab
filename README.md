@@ -1,11 +1,13 @@
 # Resources for the Mulligan Lab
 
-Most of the tools developed are described below, and include a GIF preview + a link to their folder (click on the title). The majority of these tools were designed to be run inside the ImageJ/Fiji software, which we commonly use for data analysis, plus some notebooks designed in Google Colab for additional tasks. These tools do not require any programming experience nor installing any program other than ImageJ.
+Most of the tools developed are described below, and include a GIF preview + a link to their folder (click on the title). The majority of these tools were designed to be run within the **ImageJ/Fiji** software, which we commonly use for data analysis, plus some notebooks designed in **Google Colab** for additional tasks. These tools do not require any programming experience nor installing any other program.
 
 ***For more information on how to use the scripts, check:*** [Tutorials](https://github.com/EdRey05/Resources_for_Mulligan_Lab/tree/main/Tutorials).
 
 
 # [Merger of images into hyperstacks](https://github.com/EdRey05/Resources_for_Mulligan_Lab/tree/main/Tools%20for%20EVOS-M7000%20images)
+
+<details><summary>READ MORE...</summary>
 
 **Context:**
 
@@ -20,11 +22,15 @@ The **EVOS M7000** imager takes pictures of a field of view (FOV) at different h
 * I made a script using the `os` ***Python*** library to scan all the files of a folder, get the image names and extract the relevant information with string and path operations. Then I applied a special sorting to cluster together all TIFs of the same FOV.
 * I automated the merging of TIFs into hyperstacks using the modules `IJ` and `ImagePlus` from the `ij` library. This required logic controls to identify when to stack slices, when to merge all stacks into a composite, and when to save the hyperstack.
 
+</details>
+
 **Preview of the script:**
 ![](Tutorials/Preview_Images_to_Hyperstacks_merger.gif)
 
 
 # [Tools to handle ROIs during PLA quantification](https://github.com/EdRey05/Resources_for_Mulligan_Lab/tree/main/Tools%20for%20PLA%20quantification)
+
+<details><summary>READ MORE...</summary>
 
 **Context:**
 
@@ -40,6 +46,8 @@ In Proximity Ligation Assays (PLA) we quantify the number of red puncta/dots in 
 * With this variable, I can get any number of pairs of ROIs drawn by the user for each cell but they must be in order: first one with the rectangle tool that will be saved in a "For Presentation" folder, and secondly one with the polygon tool that will be saved in a "For Analysis" folder.
 * During the iteration, all the even-numbered ROIs (rectangles) are renamed from 0, 2, 4... to index/2 +1 = 1, 2, 3... and saved as "1_2.roi" in the folder mentioned above. All the odd-numbered ROIs (polygons) are renamed from 1, 3, 5... to (index+1)/2 = 1, 2, 3... and saved as "1_1.roi" in the corresponding folder.
 * Additionally, a jpg preview of the cells selected is made (just showing the rectangles) for quick data validation/exploration.
+
+</details>
 
 ## Tool 01
 **Description:**
@@ -65,6 +73,8 @@ This tool opens the two sets of ROIs that were drawn for an image. It has no req
 
 # [PLA quantification](https://github.com/EdRey05/Resources_for_Mulligan_Lab/tree/main/Tools%20for%20PLA%20quantification)
 
+<details><summary>READ MORE...</summary>
+
 **Context:**
 
 We quantify the PLA interactions (red dots) in our images using the ***ImageJ*** software and the regions of interest (**ROIs**) generated with the tools described above. For my experiments, I wanted to test two ways of quantifying the objects in my images: **1)** Applying a threshold method from the ***ImageJ*** tools (*Image-->Adjust-->Threshold*) or **2)** Using the ***Find Maxima*** tool on ***ImageJ*** (*Process-->Find Maxima*). Both methods are followed by object counting with the ***Analyze Particles*** tool on ***ImageJ*** (*Analyze-->Analyze Particles*), and I wanted to also measure the area of the cells in case normalization was required (*Analyze-->Measure*).
@@ -82,5 +92,82 @@ We quantify the PLA interactions (red dots) in our images using the ***ImageJ***
 * The script gives a single .csv file with all the results combined in a table, and also saves .jpg images showing how the cells look and how the object detection worked (particles counted are couloured, black pixels were not counted).
 * Opening the ROIs for an image, cropping them, doing the measurements and saving the results gets very fast using the script compared to manual clicking.
 
+</details>
+
 **Preview of the script:**
 ![Preview_PLA_quantification](https://user-images.githubusercontent.com/62916582/204093397-3830acbe-80a2-4660-9b64-f3a0445ae6d0.gif)
+
+
+# [Automated PowerPoint for PLA results](https://github.com/EdRey05/Resources_for_Mulligan_Lab/tree/main/Tools%20for%20students/Eduardo%20Reyes)
+
+<details><summary>READ MORE...</summary>
+
+**Context:**
+
+Once I've used the script shown above to quantify the Proximity Ligation Assay (**PLA**) puncta, I wanted to put the cropped images and results into a PowerPoint presentation to visualize easily and quickly the 100-500 cells I quantified per condition (total ~10,000). I also wanted to have two presentations with both quantification methods tested (see script above) to determine which was more appropriate for my experiments.
+
+**Problems:**
+* Manually copying, pasting, resizing, arranging and labeling all the images is incredibly time consuming and error-prone.
+* ***ImageJ*** is not fully compatible with **Python** 3 and has its own version of it, so I can't install more libraries and things like `Pandas` and `Numpy` do not work there.
+
+**Solution:**
+* I found the package/library `python-pptx` which has been recently developed (functionalities limited but expanding) and allows for the creation of Power Point presentations from **Python** code.
+* I dove in the documentation and was able to write a function to generate slides that look like this ***(open [the notebook](https://github.com/EdRey05/Resources_for_Mulligan_Lab/blob/main/Tools%20for%20students/Eduardo%20Reyes/05-Design01_PLA_results_PPTX_generator%5BColab%5D.ipynb) to read more details about my design parameters!!!)***:
+![Slide_design](https://user-images.githubusercontent.com/62916582/204416858-70e0a772-ce0c-460a-a0b9-d3e6fddbd753.jpg)
+* I passed to this function all my images and the quantification results so I can back-track cells with ROIs and their respective counts of dots.
+* I set up a fully functional notebook on **Google Colab** for easy sharing with other lab members who don't need programming experience or install anything to use it. Also, it runs fast on that server (less than 5min to make ~100 slides with ~700 cells). 
+
+</details>
+
+**Preview of the script:**
+![Preview_05-Design01_PLA_results_PPTX_generator Colab](https://user-images.githubusercontent.com/62916582/204415085-cc39bb7c-904e-487c-a16d-0d894c1e3249.gif)
+
+
+# [Extracting RNASeq data from the Cancer Cell Line Encyclopedia](https://github.com/EdRey05/Resources_for_Mulligan_Lab/tree/main/Tools%20for%20students/Eduardo%20Reyes)
+
+<details><summary>READ MORE...</summary>
+
+**Context:**
+
+The **Broad Institute** and **Novartis** published in 2019 huge datasets resulting from a collaboration to make available distinct measurements (RNA, metabolites, mutations, etc.) of a panel of over 1500 human cancer cell lines. In our lab, (Mulligan) we have multiple cancer cell lines for which we wanted to get the RNASeq data to do some exploratory studies looking for insights on the expression levels of specific proteins. The data can be found either in [cBioPortal for Cancer Genomics](https://www.cbioportal.org/) or directly from the [CCLE](https://sites.broadinstitute.org/ccle/) website.
+
+**Problems:**
+* The dataset useful to our needs is huge, containing thousands of rows by thousands of columns. We want to retrieve a few columns since we have less than 50 cancer cell lines in our lab.
+* For few other applications, we may want to search for cell lines we don't have (or explore what's available), so we need to keep the original dataset.
+
+**Solution:**
+* I set up a **Google** account for our lab, which I used to upload the files for RNASeq (.txt files, ~500 mb each) to **Google Drive**.
+* I made a short tool in **Google Colab**, which connects to the lab drive and retrieves the files to avoid having to download and upload 1gb frequently.
+* I used `pandas` dataframe operations and user inputs to make a search tool, and extract only the required columns (all genes/rows) into a .csv file.
+* **Note:** The notebook requires specific folder structure and files to run ([see notebook](https://github.com/EdRey05/Resources_for_Mulligan_Lab/blob/main/Tools%20for%20students/Eduardo%20Reyes/03-ExtractCells_Broad_Institute_CCLE_2019_%5BColab%5D.ipynb)). Users not logged into the lab account may need to edit the directories and get the files to replicate the preview/tutorial. 
+
+</details>
+
+**Preview of the script:**
+![Preview_03-ExtractCells_Broad_Institute_CCLE_2019_ Colab](https://user-images.githubusercontent.com/62916582/204422004-47fe5726-d92d-4193-bc6a-ea30b3a93cc1.gif)
+
+
+# [Kaplan-Meier survival plot generator](https://github.com/EdRey05/Resources_for_Mulligan_Lab/tree/main/Tools%20for%20students/Eduardo%20Reyes)
+
+<details><summary>READ MORE...</summary>
+
+**Context:**
+
+A short project looking at breast cancer data available in the [cBioPortal for Cancer Genomics](https://www.cbioportal.org/) server was carried out. The study used the [METABRIC](https://www.cbioportal.org/study/summary?id=brca_metabric) dataset published in Nature journals (2012 and 2016) which has just over 2500 tumour samples. The aim of the project was to evaluate survival of patients through **Kaplan-Meier (KM)** plots and correlate them with expression levels of pairs of proteins (the **RET** receptor + ~50 hints we got from ***synthetic lethality*** assays). Our hypothesis was that the survival of a patient should increase when RET and any other of the hints were expressed at low levels in the patient, partially mimicking the concept of synthetic lethality (less expression of the pair of proteins --> tumour cells die or not proliferate as much --> the patient lives longer).
+
+**Problems:**
+* We have huge datasets for clinical and RNASeq data in .txt files which we need to clean, merge and filter.
+* We want to make **KM** plots for subsets of patients based on expression levels: Low RET + Low other, Low RET + High other, High RET + Low other, and High RET + High other (4 survival curves plotted together per pair of RET + other protein).
+
+**Solution:**
+* I set up a **Google** account for our lab, which I used to upload the files for clinical and RNASeq data (.txt files, ~500 mb each) to **Google Drive**.
+* I made two notebooks in **Google Colab**, which connect to the lab drive and retrieves the files to avoid having to download and upload 1gb frequently.
+* I generated a [first batch](https://github.com/EdRey05/Resources_for_Mulligan_Lab/blob/main/Tools%20for%20students/Eduardo%20Reyes/01-METABRIC_KM_Plot_First_Batch_%5BColab%5D.ipynb) and a [second batch](https://github.com/EdRey05/Resources_for_Mulligan_Lab/blob/main/Tools%20for%20students/Eduardo%20Reyes/02-METABRIC_KM_Plot_Second_Batch_%5BColab%5D.ipynb) of **KM** plots using the `KaplanMeierFitter` module from the `lifelines` library, also retrieving key data like time to 50% survival for all subgroups.
+* I used diverse data cleaning and filtering steps (see notebooks) to make the intended subgroups and combine the clinical and RNASeq data. 
+* From all the pairs we evaluated, most showed no significant differences between subgroups, however, we got a small group of very interesting findings that match our hypothesis and will be followed up in other projects. This is an example of the RET-SPEG very promising **KM** plot:
+![RET-SPEG](https://user-images.githubusercontent.com/62916582/204429130-1c836469-198b-4d8a-bc2c-67b8de0faaff.png)
+
+</details>
+
+**Preview of the script:**
+![Preview_01-02-METABRIC_KM_Plot Colab](https://user-images.githubusercontent.com/62916582/204424020-bae3613c-bf10-4a3b-9d50-beaf50ca8eee.gif)
