@@ -3,3 +3,7 @@ description: Queen's University
 show_downloads: false
 google_analytics: G-8N1333GWHB
 theme: jekyll-theme-dinky
+
+markdown: kramdown
+kramdown:
+  parse_block_html: true
