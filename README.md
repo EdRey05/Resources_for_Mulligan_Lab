@@ -1,12 +1,13 @@
 {::options parse_block_html="true" /}
 # Resources for the Mulligan Lab
 
-Most of the tools developed are described below, and include a GIF preview + a link to their folder (click on the title). The majority of these tools were designed to be run within the **ImageJ/Fiji** software, which we commonly use for data analysis, plus some notebooks designed in **Google Colab** for additional tasks. These tools do not require any programming experience nor installing any other program.
+Most of the tools developed are described below, and include a GIF preview + a link to the script/notebook (click on the title). The majority of these tools were designed to run within the **ImageJ/Fiji** software, which our lab commonly uses for data analysis, plus some notebooks made in **Google Colab** for additional tasks. These tools do not require any programming experience nor installing any other program (other than ImageJ) to be used.
 
 ***For more information on how to use the scripts, check:*** [Tutorials](https://github.com/EdRey05/Resources_for_Mulligan_Lab/tree/main/Tutorials).
 
+***NOTE:*** If you are reading this on Github, check out the [Github page](https://edrey05.github.io/Resources_for_Mulligan_Lab/) for easier visualization. If you are already in the Github page (has colours), you can click on the button "View on Github" from the left box to access the main repository. 
 
-# [Merger of images into hyperstacks](https://github.com/EdRey05/Resources_for_Mulligan_Lab/tree/main/Tools%20for%20EVOS-M7000%20images)
+# [Merger of images into hyperstacks](https://github.com/EdRey05/Resources_for_Mulligan_Lab/blob/main/Tools%20for%20EVOS-M7000%20images/Images_to_Hyperstacks_merger.py)
 
 <details><summary markdown="span">READ MORE...</summary>
 
@@ -24,12 +25,13 @@ The **EVOS M7000** imager takes pictures of a field of view (FOV) at different h
 * I automated the merging of TIFs into hyperstacks using the modules `IJ` and `ImagePlus` from the `ij` library. This required logic controls to identify when to stack slices, when to merge all stacks into a composite, and when to save the hyperstack.
 
 </details>
-
+ 
+  
 **Preview of the script:**
 ![](Tutorials/Preview_Images_to_Hyperstacks_merger.gif)
 
 
-# [Tools to handle ROIs during PLA quantification](https://github.com/EdRey05/Resources_for_Mulligan_Lab/tree/main/Tools%20for%20PLA%20quantification)
+# Tools to handle ROIs during PLA quantification
 
 <details><summary markdown="span">READ MORE...</summary>
 
@@ -50,21 +52,21 @@ In Proximity Ligation Assays (PLA) we quantify the number of red puncta/dots in 
 
 </details>
 
-## Tool 01
+## [Tool 01](https://github.com/EdRey05/Resources_for_Mulligan_Lab/blob/main/Tools%20for%20PLA%20quantification/Tool_01_ROI_saving_for_PLA.py)
 **Description:**
 This tool saves in a temporary folder the two sets of ROIs as described above. It has no requirements other than an opened image with all the ROIs added to the manager, but the products have to be manually moved to their appropriate destination before doing the next image.
 
 **Preview of the script:**
 ![Preview_Tool_01_ROI_saving_for_PLA](https://user-images.githubusercontent.com/62916582/203685126-e7668b9e-dbac-425e-b59c-43440aa1df3a.gif)
 
-## Tool 02
+## [Tool 02](https://github.com/EdRey05/Resources_for_Mulligan_Lab/blob/main/Tools%20for%20PLA%20quantification/Tool_02_ROI_saving_for_PLA.py)
 **Description:**
 This tool is split in two sections, the top part is for making the rectangular ROIs and the jpg preview (as mentioned in Tool 01), and the second part is for making the ROIs with the polygon tool. The idea behind the split parts is that the experimenter can pre-select the cells they want analyzed by doing the rectangular ROIs, and then someone else can take the jpg images to make the polygons, which is the time-consuming step.
 
 **Preview of the script:**
 ![Preview_Tool_02_ROI_saving_for_PLA](https://user-images.githubusercontent.com/62916582/204342846-399fb3aa-db35-4cfe-a2e5-2f550d1314f6.gif)
 
-## Tool 03
+## [Tool 03](https://github.com/EdRey05/Resources_for_Mulligan_Lab/blob/main/Tools%20for%20PLA%20quantification/Tool_03_ROI_opening_for_PLA.py)
 **Description:**
 This tool opens the two sets of ROIs that were drawn for an image. It has no requirements other than having a folder structure as described above (Processed..., ROIs). By openning a processed image (MAX projection TIF), the script can load the ROIs in case it is needed to review, delete, or add more ROIs (then just run tool 01).
 
@@ -72,7 +74,7 @@ This tool opens the two sets of ROIs that were drawn for an image. It has no req
 ![Preview_Tool_03_ROI_opening_for_PLA](https://user-images.githubusercontent.com/62916582/203877499-e528d699-5d2c-4cc5-9dbe-c07cd1293e3f.gif)
 
 
-# [PLA quantification](https://github.com/EdRey05/Resources_for_Mulligan_Lab/tree/main/Tools%20for%20PLA%20quantification)
+# [PLA quantification](https://github.com/EdRey05/Resources_for_Mulligan_Lab/blob/main/Tools%20for%20PLA%20quantification/PLA_quantification.py)
 
 <details><summary markdown="span">READ MORE...</summary>
 
@@ -94,12 +96,13 @@ We quantify the PLA interactions (red dots) in our images using the ***ImageJ***
 * Opening the ROIs for an image, cropping them, doing the measurements and saving the results gets very fast using the script compared to manual clicking.
 
 </details>
-
+ 
+  
 **Preview of the script:**
 ![Preview_PLA_quantification](https://user-images.githubusercontent.com/62916582/204093397-3830acbe-80a2-4660-9b64-f3a0445ae6d0.gif)
 
 
-# [Automated PowerPoint for PLA results](https://github.com/EdRey05/Resources_for_Mulligan_Lab/tree/main/Tools%20for%20students/Eduardo%20Reyes)
+# [Automated PowerPoint for PLA results](https://github.com/EdRey05/Resources_for_Mulligan_Lab/blob/main/Tools%20for%20students/Eduardo%20Reyes/05-Design01_PLA_results_PPTX_generator%5BColab%5D.ipynb)
 
 <details><summary markdown="span">READ MORE...</summary>
 
@@ -119,12 +122,13 @@ Once I've used the script shown above to quantify the Proximity Ligation Assay (
 * I set up a fully functional notebook on **Google Colab** for easy sharing with other lab members who don't need programming experience or install anything to use it. Also, it runs fast on that server (less than 5min to make ~100 slides with ~700 cells). 
 
 </details>
-
+ 
+  
 **Preview of the script:**
 ![Preview_05-Design01_PLA_results_PPTX_generator Colab](https://user-images.githubusercontent.com/62916582/204415085-cc39bb7c-904e-487c-a16d-0d894c1e3249.gif)
 
 
-# [Extracting RNASeq data from the Cancer Cell Line Encyclopedia](https://github.com/EdRey05/Resources_for_Mulligan_Lab/tree/main/Tools%20for%20students/Eduardo%20Reyes)
+# [Extracting RNASeq data from the Cancer Cell Line Encyclopedia](https://github.com/EdRey05/Resources_for_Mulligan_Lab/blob/main/Tools%20for%20students/Eduardo%20Reyes/03-ExtractCells_Broad_Institute_CCLE_2019_%5BColab%5D.ipynb)
 
 <details><summary markdown="span">READ MORE...</summary>
 
@@ -143,12 +147,13 @@ The **Broad Institute** and **Novartis** published in 2019 huge datasets resulti
 * **Note:** The notebook requires specific folder structure and files to run ([see notebook](https://github.com/EdRey05/Resources_for_Mulligan_Lab/blob/main/Tools%20for%20students/Eduardo%20Reyes/03-ExtractCells_Broad_Institute_CCLE_2019_%5BColab%5D.ipynb)). Users not logged into the lab account may need to edit the directories and get the files to replicate the preview/tutorial. 
 
 </details>
-
+ 
+  
 **Preview of the script:**
 ![Preview_03-ExtractCells_Broad_Institute_CCLE_2019_ Colab](https://user-images.githubusercontent.com/62916582/204422004-47fe5726-d92d-4193-bc6a-ea30b3a93cc1.gif)
 
 
-# [Kaplan-Meier survival plot generator](https://github.com/EdRey05/Resources_for_Mulligan_Lab/tree/main/Tools%20for%20students/Eduardo%20Reyes)
+# [Kaplan-Meier survival plot generator](https://github.com/EdRey05/Resources_for_Mulligan_Lab/blob/main/Tools%20for%20students/Eduardo%20Reyes/01-METABRIC_KM_Plot_First_Batch_%5BColab%5D.ipynb)
 
 <details><summary markdown="span">READ MORE...</summary>
 
@@ -169,6 +174,7 @@ A short project looking at breast cancer data available in the [cBioPortal for C
 ![RET-SPEG](https://user-images.githubusercontent.com/62916582/204429130-1c836469-198b-4d8a-bc2c-67b8de0faaff.png)
 
 </details>
-
+ 
+  
 **Preview of the script:**
 ![Preview_01-02-METABRIC_KM_Plot Colab](https://user-images.githubusercontent.com/62916582/204424020-bae3613c-bf10-4a3b-9d50-beaf50ca8eee.gif)
