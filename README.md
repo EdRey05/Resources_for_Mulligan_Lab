@@ -128,13 +128,15 @@ Once I've used the script shown above to quantify the Proximity Ligation Assay (
 ![Preview_05-Design01_PLA_results_PPTX_generator Colab](https://user-images.githubusercontent.com/62916582/204415085-cc39bb7c-904e-487c-a16d-0d894c1e3249.gif)
 
 
-# [Extracting RNASeq data from the Cancer Cell Line Encyclopedia](https://github.com/EdRey05/Resources_for_Mulligan_Lab/blob/main/Tools%20for%20students/Eduardo%20Reyes/03-ExtractCells_Broad_Institute_CCLE_2019_%5BColab%5D.ipynb)
+# [Extracting RNASeq data from the Cancer Cell Line Encyclopedia](https://github.com/EdRey05/Resources_for_Mulligan_Lab/blob/main/Tools%20for%20RNASeq%20data/03-ExtractCells_Broad_Institute_CCLE_2019_%5BColab%5D.ipynb)
 
 <details><summary markdown="span">READ MORE...</summary>
 
 **Context:**
 
-The **Broad Institute** and **Novartis** published in 2019 huge datasets resulting from a collaboration to make available distinct measurements (RNA, metabolites, mutations, etc.) of a panel of over 1500 human cancer cell lines. In our lab, (Mulligan) we have multiple cancer cell lines for which we wanted to get the RNASeq data to do some exploratory studies looking for insights on the expression levels of specific proteins. The data can be found either in [cBioPortal for Cancer Genomics](https://www.cbioportal.org/) or directly from the [CCLE](https://sites.broadinstitute.org/ccle/) website.
+The **Broad Institute** and **Novartis** published in 2019 huge datasets resulting from a collaboration to make available distinct measurements (RNA, metabolites, mutations, etc.) of a panel of over 1500 human cancer cell lines. In our lab, (Mulligan) we have multiple cancer cell lines for which we wanted to get the RNASeq data to do some exploratory studies looking for insights on the expression levels of specific proteins. The data can be found either in [cBioPortal for Cancer Genomics](https://www.cbioportal.org/) or directly from the [CCLE](https://sites.broadinstitute.org/ccle/) website. 
+
+***UPDATE: A second notebook was generated for the most recent release of the dataset (now integrated to a bigger project called DepMap) and can be found [HERE](https://github.com/EdRey05/Resources_for_Mulligan_Lab/blob/main/Tools%20for%20RNASeq%20data/04-ExtractCells_Broad_Institute_DepMapCCLE%5BColab%5D.ipynb)***. It works the same as the preview and tutorial of the first notebook (shown here).
 
 **Problems:**
 * The dataset useful to our needs is huge, containing thousands of rows by thousands of columns. We want to retrieve a few columns since we have less than 50 cancer cell lines in our lab.
@@ -144,7 +146,7 @@ The **Broad Institute** and **Novartis** published in 2019 huge datasets resulti
 * I set up a **Google** account for our lab, which I used to upload the files for RNASeq (.txt files, ~500 mb each) to **Google Drive**.
 * I made a short tool in **Google Colab**, which connects to the lab drive and retrieves the files to avoid having to download and upload 1gb frequently.
 * I used `pandas` dataframe operations and user inputs to make a search tool, and extract only the required columns (all genes/rows) into a .csv file.
-* **Note:** The notebook requires specific folder structure and files to run ([see notebook](https://github.com/EdRey05/Resources_for_Mulligan_Lab/blob/main/Tools%20for%20students/Eduardo%20Reyes/03-ExtractCells_Broad_Institute_CCLE_2019_%5BColab%5D.ipynb)). Users not logged into the lab account may need to edit the directories and get the files to replicate the preview/tutorial. 
+* **Note:** The notebook requires specific folder structure and files to run (read notebook info). Users not logged into the lab account may need to edit the directories and get the files to replicate the preview/tutorial. 
 
 </details>
  
