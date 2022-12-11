@@ -1,7 +1,7 @@
 ######################################################################################################################################################################################
 '''
 
-Full name of script: Proximity Ligation Assay (PLA) quantification  [Version 03]
+Full name of script: Proximity Ligation Assay (PLA) quantification  [Version 04]
 
 Script languague: Jython (Python wrapper for Java, run with ImageJ/Fiji app -not pyImageJ-)
 
@@ -18,7 +18,7 @@ Made by: Eduardo Reyes Alvarez
 
 Contact: eduardo_reyes09@hotmail.com
 
-Last update: August 21, 2022
+Last update: December 11, 2022
 
 Version History:
 V01 (Jun 01, 2021): First working version of the script. Requires a specific folder structure and 2 sets of ROIs per cell of interest. Some outputs are optional
@@ -33,6 +33,8 @@ V03 (Aug  21,2022): Changed the folder structure that the script requires (compa
                     plug-in (any black particles are not counted due to the initial parameters). 
                     Pending: Enclose code into a function to enable batch mode (multiple folders). Follow-up script using python-pptx to import all the cropped images
                     produced by this script for easier result presentation.
+V04 (Dec 11, 2022): Added short parameter that needs to be passed on to the Analyze Particles plug-in for images that are calibrated in inches. Added option to pass a set
+                    of particle size and circularity different for each method. Also, there is now a Colab notebook to generate a pptx from the outputs of this script.
 '''
 
 ######################################################################################################################################################################################
@@ -55,12 +57,13 @@ from ij.gui import Roi
 #@ Integer (label="Rolling radius for PLA background subtraction:", min=1, max=50, description="<10 recommended, test your images first", value=3) PLA_background_radius
 #@ Boolean (label="Crop cells", style = "checkbox") Crop_cells
 #@ String  (choices={"-", "Threshold + Analyze Particles", "Find Maxima + Analyze Particles", "Both"}, style="listBox") Quantification
-#@ String  (visibility=MESSAGE, value="Adjust the parameters for quantification:", required=false) msg2
-#@ String  (label="Particle size (pixel squared)", description="0-Infinity, 10-1000, etc.", value="3-Infinity") particle_sizes
+#@ String  (visibility=MESSAGE, value="Parameters for quantification:", required=false) msg2
+#@ String  (visibility=MESSAGE, value="For different size+circularity between methods, pass T first a comma and then FM", required=false) msg3
+#@ String  (label="Particle size ", description="0-Infinity, 10-1000, etc.", value="3-Infinity") particle_sizes
 #@ String  (label="Particle circuarity:", description="0.00-1.00", value="0.10-1.00") particle_circularity
 #@ String  (label = "Threshold method (if selected)", style = "listBox", choices = { "-","Default", "Huang", "Intermodes","IsoData", "IJ_IsoData", "Li", "MaxEntropy", "Mean", "MinError", "Minimum", "Moments", "Otsu", "Percentile", "RenyiEntropy", "Shanbhag", "Triangle", "Yen"}) threshold_method
 #@ Integer (label="Prominence for Maxima (if selected):", min=1, max=100000, description="Test this number in a subset of images beforehand", value=500) prominence
-#@ String  (visibility=MESSAGE, value="Script made by: Eduardo Reyes-Alvarez", required=false) msg3
+#@ String  (visibility=MESSAGE, value="Script made by: Eduardo Reyes-Alvarez", required=false) msg4
 
 #Start the timer
 whole_script_starting_time = datetime.now()
@@ -157,6 +160,16 @@ if Quantification!= "-":
     #This line is needed to avoid problems with measuring ROI area
     IJ.run("Set Measurements...", "area display redirect=None decimal=2")
     
+    #Check if we have one pair of parameters or two for the quantification methods
+    if ("," in particle_sizes) & ("," in particle_circularity):
+        particle_sizes_T = particle_sizes.split(",")[0]
+        particle_sizes_FM = particle_sizes.split(",")[1]
+        particle_circularity_T = particle_circularity.split(", ")[0]
+        particle_circularity_FM = particle_circularity.split(", ")[0]
+    else:
+        particle_sizes_T = particle_sizes_FM = particle_sizes
+        particle_circularity_T = particle_circularity_FM = particle_circularity
+    
     #Create neccesary directories
     analysis_directory = os.path.join(exp_condition_folder, "Quantification")
     if not os.path.exists(analysis_directory):
@@ -231,7 +244,7 @@ if Quantification!= "-":
                         
                         #Quantify the variables of interest for the current ROI (adjust these parameters if needed)
                         IJ.run("Measure", "")
-                        IJ.run("Analyze Particles...", "size="+particle_sizes+" circularity="+particle_circularity+" show=[Overlay Masks] summarize")
+                        IJ.run("Analyze Particles...", "size="+particle_sizes_FM+" pixel circularity="+particle_circularity_FM+" show=[Overlay Masks] summarize")
                         
                         #Duplicate the current ROI and get it into a variable
                         IJ.run("Duplicate...", "title=current_ROI.tif duplicate")
@@ -301,7 +314,7 @@ if Quantification!= "-":
                         
                         #Quantify the variables of interest for the current ROI (adjust these parameters if needed)
                         IJ.run("Measure", "")
-                        IJ.run("Analyze Particles...", "size="+particle_sizes+" circularity="+particle_circularity+" show=[Overlay Masks] summarize")
+                        IJ.run("Analyze Particles...", "size="+particle_sizes_T+" pixel circularity="+particle_circularity_T+" show=[Overlay Masks] summarize")
                         
                         #Duplicate the current ROI and get it into a variable
                         IJ.run("Duplicate...", "title=current_ROI.tif duplicate")
