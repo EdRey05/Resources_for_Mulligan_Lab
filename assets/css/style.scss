@@ -3,11 +3,12 @@
 
 @import "{{ site.theme }}";
 
+$sidebar-width: 220px; 
 
 // If there is a wrapper that limits the overall width, increase its max-width
 .wrapper {
   max-width: 99%; // or another value to utilize more of the screen width
-  margin-left: 350
+  margin-left: 350px
 }
 
 // Adjust the main content section
