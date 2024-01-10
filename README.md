@@ -26,10 +26,9 @@ The **EVOS M7000** imager takes pictures of a field of view (FOV) at different h
 
 </details>
  
-  
 **Preview of the script:**
-![](Tutorials/Preview_Images_to_Hyperstacks_merger.gif)
 
+![](Tutorials/Preview_Images_to_Hyperstacks_merger.gif)
 
 # Tools to handle ROIs during PLA quantification
 
@@ -37,7 +36,7 @@ The **EVOS M7000** imager takes pictures of a field of view (FOV) at different h
 
 **Context:**
   
-In Proximity Ligation Assays (PLA) we quantify the number of red puncta/dots in blue+green+red images, which reflects the interactions of two proteins. We make a region of interest (**ROI**) around individual cells to quantify the interactions per cell, and make a bigger ROI for representative figures or data presentation. In   my PLA experiments, I quantified around 10,000 individual cells using the ImageJ software and generated multiple tools described below to automate the saving and       opening of ROIs.
+In Proximity Ligation Assays (PLA) we quantify the number of red puncta/dots in blue+green+red images, which reflects the interactions of two proteins. We make a region of interest (**ROI**) around individual cells to quantify the interactions per cell, and make a bigger ROI for representative figures or data presentation. In   my PLA experiments, I quantified around 10,000 individual cells using the ImageJ software and generated multiple tools described below to automate the saving and opening of ROIs.
 
 **Problems:**
 * Drawing the ROIs has to be done manually due to the selection criteria of the experimenter, however, saving them is time-consuming and does not require expertise.
@@ -57,6 +56,7 @@ In Proximity Ligation Assays (PLA) we quantify the number of red puncta/dots in 
 This tool saves in a temporary folder the two sets of ROIs as described above. It has no requirements other than an opened image with all the ROIs added to the manager, but the products have to be manually moved to their appropriate destination before doing the next image.
 
 **Preview of the script:**
+
 ![Preview_Tool_01_ROI_saving_for_PLA](https://user-images.githubusercontent.com/62916582/203685126-e7668b9e-dbac-425e-b59c-43440aa1df3a.gif)
 
 ## [Tool 02](https://github.com/EdRey05/Resources_for_Mulligan_Lab/blob/main/Tools%20for%20PLA%20quantification/Tool_02_ROI_saving_for_PLA.py)
@@ -64,6 +64,7 @@ This tool saves in a temporary folder the two sets of ROIs as described above. I
 This tool is split in two sections, the top part is for making the rectangular ROIs and the jpg preview (as mentioned in Tool 01), and the second part is for making the ROIs with the polygon tool. The idea behind the split parts is that the experimenter can pre-select the cells they want analyzed by doing the rectangular ROIs, and then someone else can take the jpg images to make the polygons, which is the time-consuming step.
 
 **Preview of the script:**
+
 ![Preview_Tool_02_ROI_saving_for_PLA](https://user-images.githubusercontent.com/62916582/204342846-399fb3aa-db35-4cfe-a2e5-2f550d1314f6.gif)
 
 ## [Tool 03](https://github.com/EdRey05/Resources_for_Mulligan_Lab/blob/main/Tools%20for%20PLA%20quantification/Tool_03_ROI_opening_for_PLA.py)
@@ -71,6 +72,7 @@ This tool is split in two sections, the top part is for making the rectangular R
 This tool opens the two sets of ROIs that were drawn for an image. It has no requirements other than having a folder structure as described above (Processed..., ROIs). By openning a processed image (MAX projection TIF), the script can load the ROIs in case it is needed to review, delete, or add more ROIs (then just run tool 01).
 
 **Preview of the script:**
+
 ![Preview_Tool_03_ROI_opening_for_PLA](https://user-images.githubusercontent.com/62916582/203877499-e528d699-5d2c-4cc5-9dbe-c07cd1293e3f.gif)
 
 
@@ -96,9 +98,9 @@ We quantify the PLA interactions (red dots) in our images using the ***ImageJ***
 * Opening the ROIs for an image, cropping them, doing the measurements and saving the results gets very fast using the script compared to manual clicking.
 
 </details>
- 
   
 **Preview of the script:**
+
 ![Preview_PLA_quantification](https://user-images.githubusercontent.com/62916582/204093397-3830acbe-80a2-4660-9b64-f3a0445ae6d0.gif)
 
 
@@ -123,8 +125,8 @@ Once I've used the script shown above to quantify the Proximity Ligation Assay (
 
 </details>
  
-  
 **Preview of the script:**
+
 ![Preview_05-Design01_PLA_results_PPTX_generator Colab](https://user-images.githubusercontent.com/62916582/204415085-cc39bb7c-904e-487c-a16d-0d894c1e3249.gif)
 
 
@@ -149,9 +151,9 @@ The **Broad Institute** and **Novartis** published in 2019 huge datasets resulti
 * **Note:** The notebook requires specific folder structure and files to run (read notebook info). Users not logged into the lab account may need to edit the directories and get the files to replicate the preview/tutorial. 
 
 </details>
- 
   
 **Preview of the script:**
+
 ![Preview_03-ExtractCells_Broad_Institute_CCLE_2019_ Colab](https://user-images.githubusercontent.com/62916582/204422004-47fe5726-d92d-4193-bc6a-ea30b3a93cc1.gif)
 
 
@@ -177,6 +179,6 @@ A short project looking at breast cancer data available in the [cBioPortal for C
 
 </details>
  
-  
 **Preview of the script:**
+
 ![Preview_01-02-METABRIC_KM_Plot Colab](https://user-images.githubusercontent.com/62916582/204424020-bae3613c-bf10-4a3b-9d50-beaf50ca8eee.gif)
