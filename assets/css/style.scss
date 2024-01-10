@@ -1,0 +1,18 @@
+// Assuming you're using a similar breakpoint as the theme for consistency
+$large-breakpoint: 850px;
+
+// Custom style overrides
+@include large {
+  section {
+    width: 95%; // Or any percentage or fixed width you prefer
+    float: none; // Remove float if you want to center the section
+    margin: 0 auto; // Center the content section if float is removed
+  }
+}
+
+// If you want this to be effective for all screen sizes, not just large ones:
+section {
+  width: 75%; // Or any percentage or fixed width you prefer
+  float: none; // Remove float if you want to center the section
+  margin: 0 auto; // Center the content section if float is removed
+}
