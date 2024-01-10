@@ -3,22 +3,27 @@
 
 @import "{{ site.theme }}";
 
-// Custom styles that apply to all screens
-section {
-  width: 95%; // Using a percentage of the viewport width
-  float: none; // Remove float if you want to center the section
-  margin: 0 auto; // Center the content section on the page
-}
+// Set the width of the sidebar
+$sidebar-width: 170px;
 
 // Override the wrapper width to be 100% to ensure full use of the space
 .wrapper {
   max-width: 100%;
 }
 
-// Custom styles for when the screen width is less than 850px
+// Custom styles for the main content section
+section {
+  width: calc(100% - #{$sidebar-width}); // Calculate the width minus the sidebar width
+  margin-left: $sidebar-width; // Push the section to the right, away from the sidebar
+  float: right; // Keeps the section next to the sidebar
+  padding-bottom: 50px; // Keeps existing padding
+}
+
+// Media query for responsiveness on smaller screens
 @media screen and (max-width: 850px) {
-  section {
-    width: 95%; // Adjust this as needed for smaller screens
+  header, section {
+    width: 100%;
+    margin-left: 0;
+    float: none;
   }
-  // Add any other styles for smaller screens as needed
 }
