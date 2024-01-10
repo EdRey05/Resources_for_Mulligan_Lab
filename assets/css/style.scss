@@ -4,25 +4,26 @@
 @import "{{ site.theme }}";
 
 // Set the width of the sidebar
-$sidebar-width: 350px; // Adjust this if your sidebar is wider than 170px
+$sidebar-width: 350px; // The actual width of your sidebar
 
-// Override the wrapper width to be 100% to ensure full use of the space
+// Override the wrapper width to ensure full use of the space
 .wrapper {
-  max-width: 100%;
+  max-width: calc(100% - #{$sidebar-width}); // This limits the maximum width of the wrapper
+  margin-left: $sidebar-width; // This pushes the wrapper to the right, away from the sidebar
+  float: left; // Align to the left to respect the sidebar's space
 }
 
 // Custom styles for the main content section
 section {
-  width: 98%; // Calculate the width minus the sidebar width
-  margin-left: $sidebar-width; // Push the section to the right, away from the sidebar
-  float: right; // Keeps the section next to the sidebar
+  max-width: calc(100% - #{$sidebar-width}); // Set a maximum width
+  margin-left: $sidebar-width; // Ensure it doesn't overlap the sidebar
   padding-bottom: 50px; // Keeps existing padding
 }
 
 // Media query for responsiveness on smaller screens
 @media screen and (max-width: 850px) {
-  header, section {
-    width: 100%;
+  .wrapper, section {
+    max-width: 100%;
     margin-left: 0;
     float: none;
   }
