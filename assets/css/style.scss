@@ -13,7 +13,7 @@ $sidebar-width: 350px; // Adjust this if your sidebar is wider than 170px
 
 // Custom styles for the main content section
 section {
-  width: calc(100% - #{$sidebar-width}); // Calculate the width minus the sidebar width
+  width: 98%; // Calculate the width minus the sidebar width
   margin-left: $sidebar-width; // Push the section to the right, away from the sidebar
   float: right; // Keeps the section next to the sidebar
   padding-bottom: 50px; // Keeps existing padding
