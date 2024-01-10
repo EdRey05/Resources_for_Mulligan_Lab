@@ -8,7 +8,7 @@ $sidebar-width: 220px;
 // If there is a wrapper that limits the overall width, increase its max-width
 .wrapper {
   max-width: 99%; // or another value to utilize more of the screen width
-  margin-left: 10px
+  margin-left: 0px
 }
 
 // Adjust the main content section
@@ -23,7 +23,7 @@ section {
   .wrapper,
   section {
     max-width: 100%;
-    margin-left: 0;
+    margin-left: 250;
     float: none;
   }
 }
