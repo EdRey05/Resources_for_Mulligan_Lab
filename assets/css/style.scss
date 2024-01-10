@@ -3,9 +3,6 @@
 
 @import "{{ site.theme }}";
 
-// Set the width of the sidebar
-$sidebar-width: 220px; // Adjust this if your sidebar is wider than 170px
-
 // Override the wrapper width to be 100% to ensure full use of the space
 .wrapper {
   max-width: 100%;
@@ -13,8 +10,8 @@ $sidebar-width: 220px; // Adjust this if your sidebar is wider than 170px
 
 // Custom styles for the main content section
 section {
-  width: calc(100% - #{$sidebar-width}); // Calculate the width minus the sidebar width
-  margin-left: $sidebar-width; // Push the section to the right, away from the sidebar
+  width: 100%; // Calculate the width minus the sidebar width
+  margin-left: 300px; // Push the section to the right, away from the sidebar
   float: right; // Keeps the section next to the sidebar
   padding-bottom: 50px; // Keeps existing padding
 }
