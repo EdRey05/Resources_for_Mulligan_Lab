@@ -3,21 +3,22 @@
 
 @import "{{ site.theme }}";
 
-// Assuming you're using a similar breakpoint as the theme for consistency
-$large-breakpoint: 850px;
-
-// Custom style overrides
-@include large {
-  section {
-    width: 95%; // Or any percentage or fixed width you prefer
-    float: none; // Remove float if you want to center the section
-    margin: 0 auto; // Center the content section if float is removed
-  }
+// Custom styles that apply to all screens
+section {
+  width: 95%; // Using a percentage of the viewport width
+  float: none; // Remove float if you want to center the section
+  margin: 0 auto; // Center the content section on the page
 }
 
-// If you want this to be effective for all screen sizes, not just large ones:
-section {
-  width: 75%; // Or any percentage or fixed width you prefer
-  float: none; // Remove float if you want to center the section
-  margin: 0 auto; // Center the content section if float is removed
+// Override the wrapper width to be 100% to ensure full use of the space
+.wrapper {
+  max-width: 100%;
+}
+
+// Custom styles for when the screen width is less than 850px
+@media screen and (max-width: 850px) {
+  section {
+    width: 95%; // Adjust this as needed for smaller screens
+  }
+  // Add any other styles for smaller screens as needed
 }
