@@ -3,27 +3,9 @@
 
 @import "{{ site.theme }}";
 
-$sidebar-width: 220px; 
-
-// If there is a wrapper that limits the overall width, increase its max-width
-.wrapper {
-  max-width: 99%; // or another value to utilize more of the screen width
-  margin-left: 0px
-}
-
 // Adjust the main content section
 section {
   width: 850px; // Use the remaining space after the sidebar
   margin-left: 250px; // Add some space between the sidebar and the content
   padding: 25px; // Optional: inner padding within the section
-}
-
-// Remove the float and adjust the margins for smaller screens
-@media screen and (max-width: 1200px) {
-  .wrapper,
-  section {
-    max-width: 100%;
-    margin-left: 250;
-    float: none;
-  }
 }
