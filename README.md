@@ -182,3 +182,11 @@ A short project looking at breast cancer data available in the [cBioPortal for C
 **Preview of the script:**
 
 ![Preview_01-02-METABRIC_KM_Plot Colab](https://user-images.githubusercontent.com/62916582/204424020-bae3613c-bf10-4a3b-9d50-beaf50ca8eee.gif)
+
+**UPDATE:**
+
+Since I gained great interest for this type of analysis, I kept learning on my own for 1-2 years after the small projects finished. Then, I found an approach to generalize the data pre-processing and analysis and created a second tool that used `ipywidgets` to interactively get user input to visualize and select the variables and ways to subdivide the dataset before plotting the KM curves. This second tool, was significantly more complex but allowed me to easily explore different combinations of variables and subgroups to gain insights about this breast cancer study. Although the 2nd tool did not require the user to modify any code blocks, the proper rendering of the widget layout I used would not work in Google Colab and thus the user should know how to install and work in Jupyter lab. For that reason and some difficulties with widget behavior, I stopped that project (Version 04).
+
+**Preview of the interactive version:**
+
+![](Tutorials/Preview_Interactive_KM.gif)
